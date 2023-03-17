@@ -1,0 +1,16 @@
+from scapy.all import *
+from scapy.layers.dot11 import Dot11Beacon, Dot11ProbeResp, Dot11Elt
+
+# Set the interface to use for scanning
+iface = "wlan0mon"
+
+# Scan for available networks and print their names and signal strengths
+def scan_callback(pkt):
+    if pkt.haslayer(Dot11Beacon) or pkt.haslayer(Dot11ProbeResp):
+        ssid = pkt[Dot11Elt].info.decode()
+        bssid = pkt[Dot11].addr3
+        signal_strength = -(256-ord(pkt.notdecoded[-4:-3]))
+        print(f"Network name: {ssid}, BSSID: {bssid}, Signal strength: {signal_strength}")
+
+print("Scanning for WiFi networks...")
+sniff(iface=iface, prn=scan_callback, timeout=10)
