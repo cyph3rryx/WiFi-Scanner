@@ -9,9 +9,9 @@ This is a simple script to scan for available WiFi networks and display their na
 
 ## Usage
 
-    1. Install the dependencies: `pip install scapy`
+    1. Install the dependencies: pip install scapy
     
-    2. Run the script: `sudo python wifi_scan.py`
+    2. Run the script: sudo python wifi_scan.py
 
 ## Output
 
